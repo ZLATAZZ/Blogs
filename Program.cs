@@ -2,6 +2,7 @@ using Blogs.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.AspNetCore.Identity;
+using Blogs.Data.Repository;
 
 namespace Blogs
 {
@@ -14,10 +15,10 @@ namespace Blogs
 			builder.Services.AddDbContext<ApplicationDbContext>(options =>
 			options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+            builder.Services.AddScoped<IRepository, Repository>();
 
-
-			// Add services to the container. Добавляем сервисы MVC
-			builder.Services.AddControllersWithViews();
+            // Add services to the container. Добавляем сервисы MVC
+            builder.Services.AddControllersWithViews();
 
 			var app = builder.Build();
 
