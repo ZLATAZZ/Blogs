@@ -7,10 +7,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Azure.Identity" Version="1.11.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.14" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.14" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
 	<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.0" />
+	<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.8.0" />
 
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\Panel\Index.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Blogs.Views.Home
+namespace Blogs.Views.Auth
 {
-    public class EditModel : PageModel
+    public class LogoutModel : PageModel
     {
         public void OnGet()
         {

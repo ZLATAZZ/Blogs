@@ -1,19 +1,18 @@
-﻿@model IEnumerable<Post>
+﻿
+@model IEnumerable<Post>
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Admin Page";
 }
 
 <div class="text-center">
     <ui>
 
-        @foreach (var post in Model)
+        @foreach(var post in Model)
         {
             <li>
-                <a asp-controller="Home" asp-action="Post" asp-route-id="@post.Id">
                     @post.Title
-                </a>
                 <a asp-controller="Panel" asp-action="Edit" asp-route-id="@post.Id">
-                    Edit
+                   Edit
                 </a>
                 <a asp-controller="Panel" asp-action="Remove" asp-route-id="@post.Id">
                     Remove
@@ -22,6 +21,5 @@
         }
 
     </ui>
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+

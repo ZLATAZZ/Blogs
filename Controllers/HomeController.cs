@@ -18,7 +18,8 @@ namespace Blogs.Controllers
 
 		public IActionResult Index()
 		{
-			return View();
+			var posts = _repo.GetAllPosts();
+			return View(posts);
 		}
 
 		public IActionResult Privacy()
@@ -32,32 +33,12 @@ namespace Blogs.Controllers
 			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
 		}
 
-		public IActionResult Post()
+		public IActionResult Post(int id)
 		{
-			return View();
+			var post = _repo.GetPost(id);
+
+			return View(post);
 		}
 
-		[HttpGet]
-		public IActionResult Edit()
-		{
-			return View(new Post());
-		}
-
-		[HttpPost]
-		public async Task<IActionResult> Edit(Post post)
-		{
-			_repo.AddPost(post);
-
-			if(await _repo.SaveChangesAsync())
-			{
-                return RedirectToAction("Index");
-            }
-			else
-			{
-                return View(post);
-            }
-
-			
-		}
-	}
+    }
 }
