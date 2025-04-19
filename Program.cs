@@ -1,8 +1,8 @@
 using Blogs.Data;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
 using Blogs.Data.Repository;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace Blogs
 {
@@ -20,74 +20,31 @@ namespace Blogs
                 options.Password.RequireDigit = false;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
-                options.Password.RequiredLength = 6;
+                options.Password.RequiredLength = 4;
             })
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
 
-            builder.Services.AddTransient<IRepository, Repository>();
-
-            // Add services to the container. Добавляем сервисы MVC
-            builder.Services.AddControllersWithViews();
-
             builder.Services.ConfigureApplicationCookie(options =>
             {
-                options.LoginPath = "/Auth/Login"; // Путь для редиректа, если не аутентифицирован
-                options.LogoutPath = "/Auth/LogOut"; // Путь для выхода
-                options.SlidingExpiration = true; // Обновление времени жизни сессии
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(30); // Время жизни сессии
+                options.LoginPath = "/Auth/Login";
+                options.LogoutPath = "/Auth/Logout";
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+                options.SlidingExpiration = true;
             });
+
+            builder.Services.AddTransient<IRepository, Repository>();
+
+            builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
 
-            // Create scope to manage DB context and identity-related services
             using (var scope = app.Services.CreateScope())
             {
                 var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-                var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
-                var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-
-                // Check BD connection
-                Console.WriteLine("Проверка подключения к БД...");
-                try
-                {
-                    if (dbContext.Database.CanConnect())
-                    {
-                        Console.WriteLine("Подключение успешно!");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Ошибка подключения!");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Ошибка подключения: {ex.Message}");
-                }
-
                 dbContext.Database.EnsureCreated();
-
-                // Add admin role if it doesn't exist
-                var adminRole = new IdentityRole("Admin");
-                if (!dbContext.Roles.Any())
-                {
-                    roleManager.CreateAsync(adminRole).GetAwaiter().GetResult();
-                }
-
-                // Add admin user if it doesn't exist
-                if (!dbContext.Users.Any(u => u.UserName == "admin"))
-                {
-                    var adminUser = new IdentityUser
-                    {
-                        UserName = "admin",
-                        Email = "admin@test.com"
-                    };
-                    userManager.CreateAsync(adminUser, "Password1").GetAwaiter().GetResult();
-                    userManager.AddToRoleAsync(adminUser, adminRole.Name).GetAwaiter().GetResult();
-                }
             }
 
-            // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");

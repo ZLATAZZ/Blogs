@@ -1,0 +1,21 @@
+﻿@model List<Blogs.Models.Post>
+
+@{
+    ViewData["Title"] = "My Posts";
+}
+
+<h2>My Posts</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Create New Post</a>
+</p>
+
+@foreach (var post in Model)
+{
+    <div class="card my-2">
+        <div class="card-body">
+            <h4>@post.Title</h4>
+            <p>@post.Body</p>
+        </div>
+    </div>
+}

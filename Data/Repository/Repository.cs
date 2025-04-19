@@ -1,4 +1,5 @@
 ﻿using Blogs.Models;
+using Microsoft.AspNetCore.Identity;
 using System.Linq;
 
 namespace Blogs.Data.Repository
@@ -50,6 +51,9 @@ namespace Blogs.Data.Repository
             return false;
         }
 
-       
+        public List<IdentityUser> GetAllUsers()
+        {
+            return _context.Users.ToList(); // Получаем всех пользователей
+        }
     }
 }

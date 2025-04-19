@@ -12,6 +12,16 @@ namespace Blogs.Data
         }
         public DbSet<Post> Posts { get; set; }
 
-		
-	}
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            // Определяем внешний ключ между Post и IdentityUser
+            builder.Entity<Post>()
+                .HasOne(p => p.User)
+                .WithMany()
+                .HasForeignKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+        }
+    }
 }

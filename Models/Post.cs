@@ -1,4 +1,6 @@
-﻿namespace Blogs.Models
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace Blogs.Models
 {
 	public class Post
 	{
@@ -9,5 +11,9 @@
 		public string Body { get; set; } = "";
 
 		public DateTime Created { get; set; } = DateTime.Now;
+
+        // Связь с пользователем
+        public string? UserId { get; set; }
+        public IdentityUser User { get; set; }
     }
 }

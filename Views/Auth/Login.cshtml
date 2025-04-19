@@ -1,17 +1,23 @@
-﻿
-@model LoginViewModel
-@{
-
-}
+﻿@model LoginViewModel
 
 <form asp-controller="Auth" asp-action="Login" method="post">
-	<div>
-		<label>Username</label>
-		<input asp-for="UserName"/>
-	</div>
-	<div>
-		<label>Password</label>
-		<input asp-for="Password" />
-	</div>
-	<input type="submit" value="Sign In"/>
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div>
+        <label asp-for="UserName"></label>
+        <input asp-for="UserName" class="form-control" />
+        <span asp-validation-for="UserName" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="Password"></label>
+        <input asp-for="Password" class="form-control" type="password" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+
+    <input type="submit" value="Sign In" class="btn btn-primary mt-2" />
 </form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

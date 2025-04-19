@@ -1,0 +1,25 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model IdentityUser
+@{
+    ViewData["Title"] = "My Profile";
+    var posts = ViewBag.Posts as List<Blogs.Models.Post>;
+}
+
+<h2>Welcome, @Model.UserName!</h2>
+
+@if (posts != null && posts.Any())
+{
+    <h3>Your Posts</h3>
+    <ul>
+        @foreach (var post in posts)
+        {
+            <li>
+                <strong>@post.Title</strong><br />
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>You don't have any posts yet.</p>
+}

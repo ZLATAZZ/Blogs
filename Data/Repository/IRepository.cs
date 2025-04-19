@@ -1,4 +1,5 @@
 ﻿using Blogs.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace Blogs.Data.Repository
 {
@@ -12,6 +13,8 @@ namespace Blogs.Data.Repository
 
 
         Task<bool> SaveChangesAsync();
-       
+
+        List<IdentityUser> GetAllUsers();
+
     }
 }
