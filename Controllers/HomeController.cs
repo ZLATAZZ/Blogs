@@ -18,8 +18,8 @@ namespace Blogs.Controllers
 
 		public IActionResult Index()
 		{
-			var posts = _repo.GetAllPosts();
-			return View(posts);
+			
+			return View();
 		}
 
 		public IActionResult Privacy()
@@ -35,10 +35,15 @@ namespace Blogs.Controllers
 
 		public IActionResult Post(int id)
 		{
+
 			var post = _repo.GetPost(id);
 
 			return View(post);
 		}
-
+        public IActionResult Posts()
+        {
+            var posts = _repo.GetAllPosts();
+            return View(posts);
+        }
     }
 }
