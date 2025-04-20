@@ -18,10 +18,24 @@ namespace Blogs.Controllers
             _userManager = userManager;
         }
 
+        //public async Task<IActionResult> Index()
+        //{
+        //    //var posts = _repo.GetAllPosts();
+        //    //return View(posts);
+        //    var user = await _userManager.GetUserAsync(User);
+        //    var posts = _repo.GetAllPosts().Where(p => p.UserId == user.Id).ToList(); // Только свои посты
+        //    return View(posts);
+
+        //}
         public async Task<IActionResult> Index()
         {
             var user = await _userManager.GetUserAsync(User);
-            var posts = _repo.GetAllPosts().Where(p => p.UserId == user.Id).ToList(); // Только свои посты
+            if (user == null)
+                return RedirectToAction("Login", "Auth");
+
+            var posts = _repo.GetAllPosts().Where(p => p.UserId == user.Id).ToList();
+
+            ViewBag.Posts = posts;
             return View(posts);
         }
 
@@ -30,19 +44,44 @@ namespace Blogs.Controllers
             return View();
         }
 
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create(Post post)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var user = await _userManager.GetUserAsync(User);
+        //        post.UserId = user.Id;
+
+        //        _repo.AddPost(post);
+        //        await _repo.SaveChangesAsync();
+
+        //        return RedirectToAction("Index", "Profile"); // или Index
+        //    }
+
+        //    return View(post);
+        //}
+
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Post post)
         {
-            if (ModelState.IsValid)
-            {
-                var user = await _userManager.GetUserAsync(User);
-                post.UserId = user.Id;
-
+            Console.WriteLine($"Title: {post.Title}, Body: {post.Body}"); // Выводим полученные данные
+            if (post.Id > 0)
+                _repo.UpdatePost(post);
+            else
                 _repo.AddPost(post);
-                return RedirectToAction(nameof(Index));
+
+            if (await _repo.SaveChangesAsync())
+            {
+                // Редирект на профиль, где отображаются только посты текущего пользователя
+                return RedirectToAction("Index", "Profile"); // Переход в профиль после создания поста
             }
-            return View(post);
+            else
+            {
+                return View(post); // Если ошибка, возвращаем модель с данными в представление
+            }
         }
+
+
     }
 }

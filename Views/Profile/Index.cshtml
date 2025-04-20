@@ -1,20 +1,21 @@
-﻿@using Microsoft.AspNetCore.Identity
-@model IdentityUser
+﻿@model Blogs.Models.ProfileViewModel
+
 @{
     ViewData["Title"] = "My Profile";
-    var posts = ViewBag.Posts as List<Blogs.Models.Post>;
 }
 
-<h2>Welcome, @Model.UserName!</h2>
+<h2>Welcome, @Model.User.UserName!</h2>
 
-@if (posts != null && posts.Any())
+@if (Model.Posts != null && Model.Posts.Any())
 {
     <h3>Your Posts</h3>
     <ul>
-        @foreach (var post in posts)
+        @foreach (var post in Model.Posts)
         {
             <li>
-                <strong>@post.Title</strong><br />
+                <a asp-controller="Home" asp-action="Index" asp-route-userId="@Model.User.Id">
+                    @post.Title
+                </a>
             </li>
         }
     </ul>

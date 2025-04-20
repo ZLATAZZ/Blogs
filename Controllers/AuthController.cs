@@ -31,7 +31,7 @@ namespace Blogs.Controllers
         public async Task<IActionResult> Login(LoginViewModel loginView) { 
         
             var result = await _signInManager.PasswordSignInAsync(loginView.UserName, loginView.Password, false, false);
-            return RedirectToAction("Index", "Panel");
+            return RedirectToAction("Index", "Profile");
 
         }
 
