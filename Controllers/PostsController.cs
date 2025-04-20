@@ -63,24 +63,26 @@ namespace Blogs.Controllers
         //}
 
         [HttpPost]
+        [HttpPost]
         public async Task<IActionResult> Create(Post post)
         {
-            Console.WriteLine($"Title: {post.Title}, Body: {post.Body}"); // Выводим полученные данные
-            if (post.Id > 0)
-                _repo.UpdatePost(post);
-            else
-                _repo.AddPost(post);
+            var user = await _userManager.GetUserAsync(User);
+            if (user != null)
+            {
+                post.UserId = user.Id; // Связываем пост с текущим пользователем
+                if (post.Id > 0)
+                    _repo.UpdatePost(post);
+                else
+                    _repo.AddPost(post);
 
-            if (await _repo.SaveChangesAsync())
-            {
-                // Редирект на профиль, где отображаются только посты текущего пользователя
-                return RedirectToAction("Index", "Profile"); // Переход в профиль после создания поста
+                if (await _repo.SaveChangesAsync())
+                {
+                    return RedirectToAction("Index", "Profile"); // Редирект в профиль после создания поста
+                }
             }
-            else
-            {
-                return View(post); // Если ошибка, возвращаем модель с данными в представление
-            }
+            return View(post);
         }
+
 
 
     }
