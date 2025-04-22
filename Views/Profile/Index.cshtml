@@ -13,7 +13,7 @@
         @foreach (var post in Model.Posts)
         {
             <li>
-                <a asp-controller="Home" asp-action="Index" asp-route-userId="@Model.User.Id">
+                <a asp-controller="Home" asp-action="Post" asp-route-id="@post.Id">
                     @post.Title
                 </a>
             </li>
