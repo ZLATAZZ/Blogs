@@ -1,22 +1,52 @@
-html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
 body {
-  margin-bottom: 60px;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #c3cfe2, #e2ebf0);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+.hero {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: no-repeat center center;
+    position: relative;
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 500px;
+    text-align: center;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    color: blueviolet;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+    .glass-card h1 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+    }
+
+    .glass-card p {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+    }
+
+    .glass-card a {
+        background: rgba(255, 255, 255, 0.2);
+        color: #fff;
+        padding: 12px 24px;
+        border-radius: 10px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+        .glass-card a:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }

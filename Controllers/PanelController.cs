@@ -6,7 +6,6 @@ using System.Diagnostics;
 
 namespace Blogs.Controllers
 {
-    [Authorize(Roles = "Admin")]
     public class PanelController : Controller
     {
         private IRepository _repo;
@@ -69,7 +68,7 @@ namespace Blogs.Controllers
         {
             _repo.RemovePost(id);
             await _repo.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Profile");
 
         }
     }

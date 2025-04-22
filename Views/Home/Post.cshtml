@@ -1,7 +1,18 @@
 ﻿@model Post
-@{
-   
-}
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<IdentityUser> UserManager
+@inject SignInManager<IdentityUser> SignInManager
 
 <h2>@Model.Title</h2>
-@* <p>Автор: @Model.UserId</p> *@
+<p>@Model.Body</p>
+
+@if (SignInManager.IsSignedIn(User))
+{
+    var currentUserId = UserManager.GetUserId(User);
+
+    if (currentUserId == Model.UserId) // Только автору показываем кнопки
+    {
+        <a asp-controller="Panel" asp-action="Edit" asp-route-id="@Model.Id">Редактировать</a>
+        <a asp-controller = "Panel" asp-action = "Remove" asp-route-id = "@Model.Id">Удалить </a >
+    }
+}
