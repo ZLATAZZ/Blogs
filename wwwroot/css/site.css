@@ -23,7 +23,7 @@ body {
     max-width: 500px;
     text-align: center;
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-    color: blueviolet;
+    color: black;
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
@@ -38,15 +38,56 @@ body {
     }
 
     .glass-card a {
-        background: rgba(255, 255, 255, 0.2);
-        color: #fff;
+        background: rgba(226, 211, 235, 1);
+        color: darkmagenta;
         padding: 12px 24px;
         border-radius: 10px;
         text-decoration: none;
         transition: all 0.3s ease;
-        border: 1px solid rgba(255, 255, 255, 0.3);
+        border: 1px solid rgba(226, 211, 235, 1);
     }
 
         .glass-card a:hover {
             background: rgba(255, 255, 255, 0.3);
         }
+.page-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin: 40px 0 20px;
+    color: #2c3e50;
+}
+
+.posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    padding: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.post-card {
+    background: rgba(226, 211, 235, 0.3);
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, background-color 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    text-align: center;
+}
+
+    .post-card h3 {
+        margin: 0;
+        font-size: 1.3rem;
+        color: black;
+    }
+
+    .post-card a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .post-card:hover {
+        transform: translateY(-5px);
+        background-color: rgba(255, 255, 255, 0.25);
+    }

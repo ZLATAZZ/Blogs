@@ -3,17 +3,15 @@
     ViewData["Title"] = "All posts";
 }
 
-<div class="text-center">
-    <ul>
+<h2 class="page-title">All Blog Posts</h2>
 
-        @foreach (var post in Model)
-        {
-            <li>
-                <a asp-controller="Home" asp-action="Post" asp-route-id="@post.Id">
-                    @post.Title
-                </a>
-            </li>
-        }
-
-    </ul>
+<div class="posts-grid">
+    @foreach (var post in Model)
+    {
+        <div class="post-card">
+            <a asp-controller="Home" asp-action="Post" asp-route-id="@post.Id">
+                <h3>@post.Title</h3>
+            </a>
+        </div>
+    }
 </div>
