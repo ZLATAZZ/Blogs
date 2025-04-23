@@ -34,7 +34,6 @@ namespace Blogs.Controllers
         {
             return View();
         }
-
         [HttpPost]
         public async Task<IActionResult> Create(Post post)
         {
@@ -42,6 +41,14 @@ namespace Blogs.Controllers
             if (user != null)
             {
                 post.UserId = user.Id; // Связываем пост с текущим пользователем
+
+                // Проверяем, что Title и Body не пустые
+                if (string.IsNullOrWhiteSpace(post.Title) || string.IsNullOrWhiteSpace(post.Body))
+                {
+                    ModelState.AddModelError(string.Empty, "Title and Body are required.");
+                    return View(post);  // Возвращаем пользователя на страницу с ошибкой
+                }
+
                 if (post.Id > 0)
                     _repo.UpdatePost(post);
                 else
@@ -52,8 +59,9 @@ namespace Blogs.Controllers
                     return RedirectToAction("Index", "Profile"); // Редирект в профиль после создания поста
                 }
             }
-            return View(post);
+            return View(post); // Возвращаем пользователя на страницу с постом в случае ошибки
         }
+
 
     }
 }

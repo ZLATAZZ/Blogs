@@ -4,23 +4,27 @@
     ViewData["Title"] = "My Profile";
 }
 
-<h2>Welcome, @Model.User.UserName!</h2>
+<div class="profile-container">
+    <div class="glass-profile-card">
+        <h2>👋 Welcome, @Model.User.UserName!</h2>
 
-@if (Model.Posts != null && Model.Posts.Any())
-{
-    <h3>Your Posts</h3>
-    <ul>
-        @foreach (var post in Model.Posts)
+        @if (Model.Posts != null && Model.Posts.Any())
         {
-            <li>
-                <a asp-controller="Home" asp-action="Post" asp-route-id="@post.Id">
-                    @post.Title
-                </a>
-            </li>
+            <h3>Your Posts</h3>
+            <div class="profile-posts-grid">
+                @foreach (var post in Model.Posts)
+                {
+                    <div class="profile-post-card">
+                        <a asp-controller="Home" asp-action="Post" asp-route-id="@post.Id">
+                            <h4>@post.Title</h4>
+                        </a>
+                    </div>
+                }
+            </div>
         }
-    </ul>
-}
-else
-{
-    <p>You don't have any posts yet.</p>
-}
+        else
+        {
+            <p class="no-posts">You don't have any posts yet.</p>
+        }
+    </div>
+</div>

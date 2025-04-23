@@ -3,16 +3,23 @@
 @inject UserManager<IdentityUser> UserManager
 @inject SignInManager<IdentityUser> SignInManager
 
-<h2>@Model.Title</h2>
-<p>@Model.Body</p>
+<div class="post-wrapper">
+    <h2>@Model.Title</h2>
+    <p>@Model.Body</p>
 
-@if (SignInManager.IsSignedIn(User))
-{
-    var currentUserId = UserManager.GetUserId(User);
-
-    if (currentUserId == Model.UserId) // Только автору показываем кнопки
+    @if (SignInManager.IsSignedIn(User))
     {
-        <a asp-controller="Panel" asp-action="Edit" asp-route-id="@Model.Id">Редактировать</a>
-        <a asp-controller = "Panel" asp-action = "Remove" asp-route-id = "@Model.Id">Удалить </a >
+        var currentUserId = UserManager.GetUserId(User);
+
+        if (currentUserId == Model.UserId)
+        {
+            <div class="post-actions">
+                <a asp-controller="Panel" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-edit">Edit</a>
+                <a asp-controller="Panel" asp-action="Remove" asp-route-id="@Model.Id" class="btn btn-delete"
+                   onclick="return confirm('Are you sure you want to delete this post?');">
+                    Delete
+                </a>
+            </div>
+        }
     }
-}
+</div>
