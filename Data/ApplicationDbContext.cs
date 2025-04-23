@@ -10,18 +10,20 @@ namespace Blogs.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
+
+        // a collection of Post entities in the database
         public DbSet<Post> Posts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
-            // Определяем внешний ключ между Post и IdentityUser
+            // Defines a foreign key relationship between Post and IdentityUser (UserId)
             builder.Entity<Post>()
                 .HasOne(p => p.User)
                 .WithMany()
                 .HasForeignKey(p => p.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Cascade); //delete posts, if user is deleted
         }
     }
 }

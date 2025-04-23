@@ -18,17 +18,17 @@ namespace Blogs.Controllers
             _userManager = userManager;
         }
 
-        public async Task<IActionResult> Index()
-        {
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null)
-                return RedirectToAction("Login", "Auth");
+        //public async Task<IActionResult> Index()
+        //{
+        //    var user = await _userManager.GetUserAsync(User);
+        //    if (user == null)
+        //        return RedirectToAction("Login", "Auth");
 
-            var posts = _repo.GetAllPosts().Where(p => p.UserId == user.Id).ToList();
+        //    var posts = _repo.GetAllPosts().Where(p => p.UserId == user.Id).ToList();
 
-            ViewBag.Posts = posts;
-            return View(posts);
-        }
+        //    ViewBag.Posts = posts;
+        //    return View(posts);
+        //}
 
         public IActionResult Create()
         {

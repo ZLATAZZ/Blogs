@@ -14,6 +14,7 @@ body {
     position: relative;
 }
 
+/*Home page style*/
 .glass-card {
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(10px);
@@ -50,6 +51,8 @@ body {
         .glass-card a:hover {
             background: rgba(255, 255, 255, 0.3);
         }
+
+/*All Posts Style*/
 .page-title {
     text-align: center;
     font-size: 2.5rem;
@@ -131,7 +134,7 @@ body {
 }
 
     .profile-post-card h4 {
-        color: white;
+        color: black;
         font-size: 1.1rem;
     }
 
@@ -179,7 +182,7 @@ body {
     margin-right: 1rem;
     border-radius: 6px;
     text-decoration: none;
-    color: white;
+    color: black;
 }
 
 .btn-edit {
@@ -197,7 +200,7 @@ body {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(12px);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
-    color: white;
+    color: black;
     font-family: 'Segoe UI', sans-serif;
 }
 
@@ -214,7 +217,7 @@ body {
         border-radius: 10px;
         margin-bottom: 10px;
         background-color: rgba(255, 255, 255, 0.2);
-        color: white;
+        color: black;
     }
 
         .login-form .form-control::placeholder {
@@ -274,7 +277,7 @@ body {
         border: none;
         border-radius: 10px;
         background-color: rgba(255, 255, 255, 0.2);
-        color: white;
+        color: black;
         margin-bottom: 10px;
     }
 
@@ -290,7 +293,7 @@ body {
         border-radius: 10px;
         font-weight: bold;
         transition: background 0.3s ease;
-        color: white;
+        color: black;
     }
 
         .register-form button:hover {
@@ -337,7 +340,7 @@ body {
         border: none;
         border-radius: 10px;
         background-color: rgba(255, 255, 255, 0.2);
-        color: white;
+        color: black;
         margin-bottom: 10px;
     }
 
@@ -353,7 +356,7 @@ body {
         border-radius: 10px;
         font-weight: bold;
         transition: background 0.3s ease;
-        color: white;
+        color: black;
     }
 
         .create-post-form button:hover {
@@ -366,7 +369,7 @@ body {
 }
 .alert {
     padding: 15px;
-    background-color: rgba(255, 193, 7, 0.3); /* Yellow background with transparency */
+    background-color: rgba(255, 193, 7, 0.3);
     border-left: 5px solid #ffc107;
     border-radius: 5px;
     color: #856404;
