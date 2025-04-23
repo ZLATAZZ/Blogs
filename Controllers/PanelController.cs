@@ -57,7 +57,7 @@ namespace Blogs.Controllers
                 _repo.AddPost(post);
 
             if (await _repo.SaveChangesAsync())
-                return RedirectToAction("Index");
+                return RedirectToAction("Posts", "Home");
 
             else
                 return View(post); // Если ошибка, возвращаем модель с данными в представление
