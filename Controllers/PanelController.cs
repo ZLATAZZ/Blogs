@@ -50,7 +50,7 @@ namespace Blogs.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(Post post)
         {
-            Console.WriteLine($"Title: {post.Title}, Body: {post.Body}"); // Выводим полученные данные
+            Console.WriteLine($"Title: {post.Title}, Body: {post.Body}"); 
             if (post.Id > 0)
                 _repo.UpdatePost(post);
             else
@@ -60,7 +60,7 @@ namespace Blogs.Controllers
                 return RedirectToAction("Posts", "Home");
 
             else
-                return View(post); // Если ошибка, возвращаем модель с данными в представление
+                return View(post); 
         }
 
         [HttpGet]

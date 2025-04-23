@@ -18,7 +18,6 @@ namespace Blogs.Controllers
             _userManager = userManager;
         }
 
-
         public IActionResult Create()
         {
             return View();
@@ -29,13 +28,13 @@ namespace Blogs.Controllers
             var user = await _userManager.GetUserAsync(User);
             if (user != null)
             {
-                post.UserId = user.Id; // Связываем пост с текущим пользователем
+                post.UserId = user.Id; // link post with current user
 
-                // Проверяем, что Title и Body не пустые
+                
                 if (string.IsNullOrWhiteSpace(post.Title) || string.IsNullOrWhiteSpace(post.Body))
                 {
                     ModelState.AddModelError(string.Empty, "Title and Body are required.");
-                    return View(post);  // Возвращаем пользователя на страницу с ошибкой
+                    return View(post);  
                 }
 
                 if (post.Id > 0)
@@ -45,10 +44,10 @@ namespace Blogs.Controllers
 
                 if (await _repo.SaveChangesAsync())
                 {
-                    return RedirectToAction("Index", "Profile"); // Редирект в профиль после создания поста
+                    return RedirectToAction("Index", "Profile"); // rediraction to user profile
                 }
             }
-            return View(post); // Возвращаем пользователя на страницу с постом в случае ошибки
+            return View(post); 
         }
 
 
